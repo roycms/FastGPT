@@ -35,11 +35,11 @@ svg {
 }
 ::-webkit-scrollbar-track {
   background: transparent;
-  border-radius: 2px;
+  border-radius: 1px;
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(189, 193, 197, 0.7);
-  border-radius: 2px;
+  border-radius: 1px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(189, 193, 197, 1);
@@ -87,4 +87,84 @@ textarea::placeholder {
     padding-bottom: constant(safe-area-inset-bottom);
     padding-bottom: env(safe-area-inset-bottom);
   }
+}
+
+.chakra-button {
+  // background-color:#003366  !important;
+  border-radius: 3px !important;
+  // color: white  !important;
+}
+.css-1cz0q0 {
+  // height: 200px  !important;
+  border-width: 1px !important;
+  border-radius: 3px !important;
+  border-color: #d2f4dd !important;
+}
+.css-1cz0q0:hover {
+  background-color: rgba(51, 248, 81, 0.1) !important;
+}
+.css-un6yfx {
+  width: 100px !important;
+}
+.css-1d8jh1b {
+  margin-left: 100px !important;
+}
+.css-2dlw4w .css-1i88ih1 {
+  width: 60px !important;
+  height: 60px !important;
+}
+// .css-2dlw4w:hover {
+//   background-color: #009933 !important;
+//   width: 60px  !important;
+//   height: 60px !important;
+// }
+
+.css-hlmtea img {
+  width: 150px;
+}
+.css-15b7ja6 {
+  border-width: 1px !important;
+  border-radius: 3px !important;
+  border-color: #e8f6ee !important;
+}
+.css-1amxlyc {
+  background-color: #ffffff !important;
+}
+.css-1d8jh1b {
+  background-color: #ffffff !important;
+}
+.css-17r79o {
+  display: none !important;
+}
+.css-1khdrex {
+  grid-template-columns: repeat(4, 1fr) !important;
+}
+.css-j3qg26 {
+  border-width: 1px !important;
+  border-radius: 3px !important;
+  border-color: #e8f6ee !important;
+  // background-color: #e6f6e8 !important;
+}
+
+.css-1kigrxv {
+  border-width: 1px !important;
+  border-radius: 3px !important;
+  border-color: #e8f6ee !important;
+}
+.css-1duvszo {
+  border-width: 1px !important;
+  border-radius: 3px !important;
+  border-color: #e8f6ee !important;
+  // background-color: #e6f6e8 !important;
+}
+.css-1duvszo:hover {
+  background-color: rgba(248, 220, 95, 0.1) !important;
+}
+
+.css-un6yfx {
+  background-color: rgba(248, 220, 95, 0.1) !important;
+}
+
+.chakra-modal__header {
+  background-color: rgba(51, 248, 81, 0.1) !important;
 }
