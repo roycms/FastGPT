@@ -890,6 +890,8 @@
   "key_repetition": "key 重复",
   "navbar.Account": "我的",
   "navbar.Chat": "AI聊天",
+  "navbar.Plugin": "插件",
+  "navbar.Workflow": "工作流",
   "navbar.Datasets": "知识库",
   "navbar.Studio": "AI应用",
   "navbar.Tools": "工具",

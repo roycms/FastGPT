@@ -161,18 +161,6 @@ const MyApps = () => {
                 {
                   label: t('app:type.Plugin'),
                   value: AppTypeEnum.plugin
-                },
-                {
-                  label: (
-                    <a
-                      href="http://doc.huggingface.org.cn/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <div className="css-aikecheng">AI课程中心</div>
-                    </a>
-                  ),
-                  value: 'AI课程中心'
                 }
               ]}
               value={appType}

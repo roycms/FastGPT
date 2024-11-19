@@ -37,8 +37,22 @@ const Navbar = ({ unread }: { unread: number }) => {
         label: t('common:navbar.Studio'),
         icon: 'core/app/aiLight',
         activeIcon: 'core/app/aiFill',
-        link: `/app/list`,
-        activeLink: ['/app/list', '/app/detail']
+        link: `/app/list?type=simple`,
+        activeLink: ['/app/list/simple', '/app/detail/simple']
+      },
+      {
+        label: t('common:navbar.Workflow'),
+        icon: 'core/dataset/rerank',
+        activeIcon: 'core/dataset/rerank',
+        link: `/app/list?type=advanced`,
+        activeLink: ['/app/list/advanced', '/app/detail/advanced']
+      },
+      {
+        label: t('common:navbar.Plugin'),
+        icon: 'core/dataset/mixedRecall',
+        activeIcon: 'core/dataset/mixedRecall',
+        link: `/app/list?type=plugin`,
+        activeLink: ['/app/list/plugin', '/app/detail/plugin']
       },
       {
         label: t('common:navbar.Datasets'),

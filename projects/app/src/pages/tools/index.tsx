@@ -23,7 +23,7 @@ const Tools = () => {
           {
             icon: 'common/gitLight',
             label: t('common:core.app.tool_label.github'),
-            link: 'https://github.com/labring/FastGPT'
+            link: 'http://doc.huggingface.org.cn/'
           }
         ]
       : []),

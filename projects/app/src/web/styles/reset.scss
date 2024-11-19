@@ -1,6 +1,8 @@
 @import './reactflow.scss';
 @import './default.scss';
 @import './chakraui.scss';
+@import './hlzn_ui.scss';
+@import './h-ui.scss';
 
 body,
 h1,
@@ -89,82 +91,19 @@ textarea::placeholder {
   }
 }
 
-.chakra-button {
-  // background-color:#003366  !important;
-  border-radius: 3px !important;
-  // color: white  !important;
+.css-1n02dc6 .css-7689gm {
+  clear: both !important;
+  float: none !important;
+  height: 50px !important;
+  width: 100% !important;
 }
-.css-1cz0q0 {
-  // height: 200px  !important;
-  border-width: 1px !important;
-  border-radius: 3px !important;
-  border-color: #d2f4dd !important;
+.css-1g4yje1 {
+  height: 110% !important;
 }
-.css-1cz0q0:hover {
-  background-color: rgba(51, 248, 81, 0.1) !important;
+.css-1o3fej {
+  height: 93% !important;
 }
-.css-un6yfx {
-  width: 100px !important;
-}
-.css-1d8jh1b {
-  margin-left: 100px !important;
-}
-.css-2dlw4w .css-1i88ih1 {
-  width: 60px !important;
-  height: 60px !important;
-}
-// .css-2dlw4w:hover {
-//   background-color: #009933 !important;
-//   width: 60px  !important;
-//   height: 60px !important;
-// }
-
-.css-hlmtea img {
-  width: 150px;
-}
-.css-15b7ja6 {
-  border-width: 1px !important;
-  border-radius: 3px !important;
-  border-color: #e8f6ee !important;
-}
-.css-1amxlyc {
-  background-color: #ffffff !important;
-}
-.css-1d8jh1b {
-  background-color: #ffffff !important;
-}
-.css-17r79o {
-  display: none !important;
-}
-.css-1khdrex {
-  grid-template-columns: repeat(4, 1fr) !important;
-}
-.css-j3qg26 {
-  border-width: 1px !important;
-  border-radius: 3px !important;
-  border-color: #e8f6ee !important;
-  // background-color: #e6f6e8 !important;
-}
-
-.css-1kigrxv {
-  border-width: 1px !important;
-  border-radius: 3px !important;
-  border-color: #e8f6ee !important;
-}
-.css-1duvszo {
-  border-width: 1px !important;
-  border-radius: 3px !important;
-  border-color: #e8f6ee !important;
-  // background-color: #e6f6e8 !important;
-}
-.css-1duvszo:hover {
-  background-color: rgba(248, 220, 95, 0.1) !important;
-}
-
-.css-un6yfx {
-  background-color: rgba(248, 220, 95, 0.1) !important;
-}
-
-.chakra-modal__header {
-  background-color: rgba(51, 248, 81, 0.1) !important;
+.css-13pmxen {
+  margin-bottom: 35px !important;
+  margin-left: 5px !important;
 }
