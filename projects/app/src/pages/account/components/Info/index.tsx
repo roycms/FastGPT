@@ -9,7 +9,6 @@ import {
   Link,
   Progress,
   Grid,
-  Image,
   BoxProps
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
@@ -45,6 +44,8 @@ import StandardPlanContentList from '@/components/support/wallet/StandardPlanCon
 import { TeamMemberRoleEnum } from '@fastgpt/global/support/user/team/constant';
 import QuestionTip from '@fastgpt/web/components/common/MyTooltip/QuestionTip';
 import { useSystem } from '@fastgpt/web/hooks/useSystem';
+import MyImage from '@fastgpt/web/components/common/Image/MyImage';
+import { getWebReqUrl } from '@fastgpt/web/common/system/utils';
 
 const StandDetailModal = dynamic(() => import('./standardDetailModal'));
 const TeamMenu = dynamic(() => import('@/components/support/user/team/TeamMenu'));
@@ -325,6 +326,7 @@ const MyInfo = ({ onOpenContact }: { onOpenContact: () => void }) => {
     </Box>
   );
 };
+
 const PlanUsage = () => {
   const router = useRouter();
   const { t } = useTranslation();
@@ -493,7 +495,7 @@ const PlanUsage = () => {
             </Box>
           </Flex>
           <Link
-            href={EXTRA_PLAN_CARD_ROUTE}
+            href={getWebReqUrl(EXTRA_PLAN_CARD_ROUTE)}
             transform={'translateX(15px)'}
             display={'flex'}
             alignItems={'center'}
@@ -593,6 +595,104 @@ const Other = ({ onOpenContact }: { onOpenContact: () => void }) => {
   return (
     <Box>
       <Grid gridGap={4} mt={3}>
+        {feConfigs?.docUrl && (
+          <Link
+            bg={'white'}
+            href={getDocPath('/docs/intro')}
+            target="_blank"
+            display={'flex'}
+            py={3}
+            px={6}
+            border={theme.borders.sm}
+            borderWidth={'1.5px'}
+            borderRadius={'md'}
+            alignItems={'center'}
+            userSelect={'none'}
+            textDecoration={'none !important'}
+            fontSize={'sm'}
+          >
+            <MyIcon name={'common/courseLight'} w={'18px'} color={'myGray.600'} />
+            <Box ml={2} flex={1}>
+              {t('common:system.Help Document')}
+            </Box>
+          </Link>
+        )}
+        {feConfigs?.chatbotUrl && (
+          <Link
+            href={feConfigs?.chatbotUrl}
+            target="_blank"
+            display={'flex'}
+            py={3}
+            px={6}
+            bg={'white'}
+            border={theme.borders.sm}
+            borderWidth={'1.5px'}
+            borderRadius={'md'}
+            alignItems={'center'}
+            userSelect={'none'}
+            textDecoration={'none !important'}
+            fontSize={'sm'}
+          >
+            <MyIcon name={'core/app/aiLight'} w={'18px'} />
+            <Box ml={2} flex={1}>
+              {t('common:common.system.Help Chatbot')}
+            </Box>
+          </Link>
+        )}
+
+        {feConfigs?.lafEnv && userInfo?.team.role === TeamMemberRoleEnum.owner && (
+          <Flex
+            bg={'white'}
+            py={3}
+            px={6}
+            border={theme.borders.sm}
+            borderWidth={'1.5px'}
+            borderRadius={'md'}
+            alignItems={'center'}
+            cursor={'pointer'}
+            userSelect={'none'}
+            onClick={onOpenLaf}
+            fontSize={'sm'}
+          >
+            <MyImage src="/imgs/workflow/laf.png" w={'18px'} alt="laf" />
+            <Box ml={2} flex={1}>
+              {'laf' + t('common:navbar.Account')}
+            </Box>
+            <Box
+              w={'9px'}
+              h={'9px'}
+              borderRadius={'50%'}
+              bg={userInfo?.team.lafAccount?.token ? '#67c13b' : 'myGray.500'}
+            />
+          </Flex>
+        )}
+
+        {feConfigs?.show_openai_account && (
+          <Flex
+            bg={'white'}
+            py={3}
+            px={6}
+            border={theme.borders.sm}
+            borderWidth={'1.5px'}
+            borderRadius={'md'}
+            alignItems={'center'}
+            cursor={'pointer'}
+            userSelect={'none'}
+            onClick={onOpenOpenai}
+            fontSize={'sm'}
+          >
+            <MyIcon name={'common/openai'} w={'18px'} color={'myGray.600'} />
+            <Box ml={2} flex={1}>
+              {'OpenAI / OneAPI' + t('common:navbar.Account')}
+            </Box>
+            <Box
+              w={'9px'}
+              h={'9px'}
+              borderRadius={'50%'}
+              bg={userInfo?.openaiAccount?.key ? '#67c13b' : 'myGray.500'}
+            />
+          </Flex>
+        )}
         {feConfigs?.concatMd && (
           <Button
             variant={'whiteBase'}

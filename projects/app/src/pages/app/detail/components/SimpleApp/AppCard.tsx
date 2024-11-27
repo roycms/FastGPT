@@ -5,7 +5,6 @@ import {
   Button,
   IconButton,
   HStack,
-  Modal,
   ModalBody,
   Checkbox,
   ModalFooter
@@ -19,26 +18,23 @@ import TagsEditModal from '../TagsEditModal';
 import { useSystemStore } from '@/web/common/system/useSystemStore';
 import { AppContext } from '@/pages/app/detail/components/context';
 import { useContextSelector } from 'use-context-selector';
-import PermissionIconText from '@/components/support/permission/IconText';
-import MyTag from '@fastgpt/web/components/common/Tag/index';
 import MyMenu from '@fastgpt/web/components/common/MyMenu';
 import { useI18n } from '@/web/context/I18n';
 import MyModal from '@fastgpt/web/components/common/MyModal';
 import { useRequest2 } from '@fastgpt/web/hooks/useRequest';
 import { postTransition2Workflow } from '@/web/core/app/api/app';
 import { AppTypeEnum } from '@fastgpt/global/core/app/constants';
-import { useSystem } from '@fastgpt/web/hooks/useSystem';
 
 const AppCard = () => {
   const router = useRouter();
   const { t } = useTranslation();
   const { appT } = useI18n();
-  const { isPc } = useSystem();
 
   const { appDetail, setAppDetail, onOpenInfoEdit, onDelApp } = useContextSelector(
     AppContext,
     (v) => v
   );
+
   const appId = appDetail._id;
   const { feConfigs } = useSystemStore();
   const [TeamTagsSet, setTeamTagsSet] = useState<AppSchema>();
@@ -88,7 +84,7 @@ const AppCard = () => {
         >
           {appDetail.intro || t('common:core.app.tip.Add a intro to app')}
         </Box>
-        <HStack alignItems={'flex-end'}>
+        <HStack alignItems={'center'}>
           <Button
             size={['sm', 'md']}
             variant={'whitePrimary'}
@@ -111,7 +107,7 @@ const AppCard = () => {
             <MyMenu
               Button={
                 <IconButton
-                  variant={'whiteBase'}
+                  variant={'whitePrimary'}
                   size={['smSquare', 'mdSquare']}
                   icon={<MyIcon name={'more'} w={'1rem'} />}
                   aria-label={''}
@@ -150,15 +146,15 @@ const AppCard = () => {
             />
           )}
           <Box flex={1} />
-          {isPc && (
-            <MyTag
-              type="borderFill"
-              colorSchema="gray"
-              onClick={() => (appDetail.permission.hasManagePer ? onOpenInfoEdit() : undefined)}
-            >
-              <PermissionIconText defaultPermission={appDetail.defaultPermission} />
-            </MyTag>
-          )}
+          {/* {isPc && ( */}
+          {/*   <MyTag */}
+          {/*     type="borderFill" */}
+          {/*     colorSchema="gray" */}
+          {/*     onClick={() => (appDetail.permission.hasManagePer ? onOpenInfoEdit() : undefined)} */}
+          {/*   > */}
+          {/*     <PermissionIconText defaultPermission={appDetail.defaultPermission} /> */}
+          {/*   </MyTag> */}
+          {/* )} */}
         </HStack>
       </Box>
       {TeamTagsSet && <TagsEditModal onClose={() => setTeamTagsSet(undefined)} />}
