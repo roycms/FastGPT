@@ -68,12 +68,13 @@ const LoginForm = ({ setPageType, loginSuccess }: Props) => {
   } = useForm<LoginFormType>();
 
   const [requesting, setRequesting] = useState(false);
-  const autoLoginRef = useRef(false);
-  const loginSuccessRef = useRef(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const loginCallbackRef = useRef<((response: ResLogin) => void) | null>(null);
 
   const onclickLogin = useCallback(
     async ({ username, password }: LoginFormType) => {
-      if (requesting || loginSuccessRef.current) return;
+      // 如果已经登录成功或正在请求中，直接返回
+      if (isLoggedIn || requesting) return;
       setRequesting(true);
 
       try {
@@ -82,35 +83,42 @@ const LoginForm = ({ setPageType, loginSuccess }: Props) => {
           password
         });
 
-        // 只在首次登录成功时显示提示
-        if (!loginSuccessRef.current) {
-          loginSuccessRef.current = true;
+        // 设置登录状态
+        setIsLoggedIn(true);
+
+        // 确保回调只执行一次
+        if (!loginCallbackRef.current) {
+          loginCallbackRef.current = loginSuccess;
+          // 显示登录成功提示
           toast({
             title: '登录成功',
             status: 'success'
           });
+          // 执行登录成功回调
           loginSuccess(response);
         }
       } catch (error: any) {
+        setIsLoggedIn(false);
         toast({
           title: error.message || '登录失败',
           status: 'error'
         });
-        loginSuccessRef.current = false;
+      } finally {
+        setRequesting(false);
       }
-      setRequesting(false);
     },
-    [loginSuccess, toast, requesting]
+    [loginSuccess, toast, requesting, isLoggedIn]
   );
 
-  // 自动填充用户名和密码并登录
+  // 自动登录逻辑
   useEffect(() => {
     const { token } = router.query;
 
-    // 防止重复自动登录
-    if (autoLoginRef.current || !token || loginSuccessRef.current) return;
+    if (!token || typeof token !== 'string' || isLoggedIn) {
+      return;
+    }
 
-    const credentials = decryptToken(token as string);
+    const credentials = decryptToken(token);
     if (!credentials) {
       toast({
         title: '登录链接已过期或无效',
@@ -123,22 +131,17 @@ const LoginForm = ({ setPageType, loginSuccess }: Props) => {
     setValue('username', username);
     setValue('password', password);
 
-    // 标记已经触发过自动登录
-    autoLoginRef.current = true;
-
-    // 延迟一下自动登录，等待表单状态更新
-    setTimeout(() => {
-      if (!requesting && !loginSuccessRef.current) {
-        handleSubmit(onclickLogin)();
-      }
-    }, 100);
-  }, [router.query, setValue, handleSubmit, onclickLogin, requesting, toast]);
+    // 使用 handleSubmit，但确保只在未登录时执行
+    if (!isLoggedIn) {
+      handleSubmit(onclickLogin)({ username, password });
+    }
+  }, [router.query, isLoggedIn]);
 
   // 组件卸载时重置状态
   useEffect(() => {
     return () => {
-      autoLoginRef.current = false;
-      loginSuccessRef.current = false;
+      setIsLoggedIn(false);
+      loginCallbackRef.current = null;
     };
   }, []);
 
@@ -168,7 +171,7 @@ const LoginForm = ({ setPageType, loginSuccess }: Props) => {
         <Box
           mt={'42px'}
           onKeyDown={(e) => {
-            if (e.key === 'Enter' && !e.shiftKey && !requesting && !loginSuccessRef.current) {
+            if (e.key === 'Enter' && !e.shiftKey && !requesting && !isLoggedIn) {
               handleSubmit(onclickLogin)();
             }
           }}
@@ -227,7 +230,7 @@ const LoginForm = ({ setPageType, loginSuccess }: Props) => {
             colorScheme="blue"
             isLoading={requesting}
             onClick={handleSubmit(onclickLogin)}
-            disabled={requesting || loginSuccessRef.current}
+            disabled={requesting || isLoggedIn}
           >
             登录
           </Button>

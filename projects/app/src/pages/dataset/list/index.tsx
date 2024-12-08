@@ -99,6 +99,17 @@ const Dataset = () => {
     [searchKey, setSearchKey, t]
   );
 
+  const onClickWebsiteSync = useCallback(() => {
+    if (!feConfigs?.isPlus) {
+      toast({
+        status: 'warning',
+        title: t('common:common.system.Need Contact Admin')
+      });
+      return;
+    }
+    router.push('/sync');
+  }, [feConfigs?.isPlus, router, toast, t]);
+
   return (
     <MyBox
       isLoading={myDatasets.length === 0 && isFetchingDatasets}
@@ -172,6 +183,15 @@ const Dataset = () => {
                           label: t('dataset:external_file'),
                           description: t('dataset:external_file_dataset_desc'),
                           onClick: () => onSelectDatasetType(DatasetTypeEnum.externalFile)
+                        }
+                      ]
+                    },
+                    {
+                      children: [
+                        {
+                          icon: 'core/dataset/websiteDatasetColor',
+                          label: t('chat:web_site_sync'),
+                          onClick: onClickWebsiteSync
                         }
                       ]
                     },
