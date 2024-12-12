@@ -22,19 +22,19 @@ const Navbar: React.FC = () => {
           >
             <ul className="clearfix">
               <li className="current">
-                <a href="">首页</a>
+                <a href="https://sys.agent-ai.cn/?f=首页">首页</a>
               </li>
               <li>
-                <a href="#">模型管理</a>
+                <a href="https://sys.agent-ai.cn/?f=模型管理">模型管理</a>
               </li>
               <li>
-                <a href="#">模型微调</a>
+                <a href="https://sys.agent-ai.cn/?f=模型微调">模型微调</a>
               </li>
               <li>
-                <a href="#">数据管理</a>
+                <a href="https://sys.agent-ai.cn/?f=数据集管理">数据集管理</a>
               </li>
               <li>
-                <a href="#">AI课程服务</a>
+                <a href="https://sys.agent-ai.cn/?f=AI课程">AI课程</a>
               </li>
               {/* ... 其他菜单项 ... */}
             </ul>
