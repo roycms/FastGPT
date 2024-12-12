@@ -3,12 +3,16 @@ import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useSystemStore } from '@/web/common/system/useSystemStore';
 import { useRouter } from 'next/router';
-import { AI_POINT_USAGE_CARD_ROUTE } from '@/web/support/wallet/sub/constants';
 import MySelect, { SelectProps } from '@fastgpt/web/components/common/MySelect';
 import { HUGGING_FACE_ICON, LOGO_ICON } from '@fastgpt/global/common/system/constants';
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, useDisclosure } from '@chakra-ui/react';
 import Avatar from '@fastgpt/web/components/common/Avatar';
 import MyTooltip from '@fastgpt/web/components/common/MyTooltip';
+import dynamic from 'next/dynamic';
+
+const AiPointsModal = dynamic(() =>
+  import('@/pages/price/components/Points').then((mod) => mod.AiPointsModal)
+);
 
 type Props = SelectProps & {
   disableTip?: string;
@@ -18,6 +22,22 @@ const AIModelSelector = ({ list, onchange, disableTip, ...props }: Props) => {
   const { t } = useTranslation();
   const { feConfigs, llmModelList, vectorModelList } = useSystemStore();
   const router = useRouter();
+
+  const {
+    isOpen: isOpenAiPointsModal,
+    onClose: onCloseAiPointsModal,
+    onOpen: onOpenAiPointsModal
+  } = useDisclosure();
+
+  const avatarSize = useMemo(() => {
+    const size = {
+      sm: '1rem',
+      md: '1.2rem',
+      lg: '1.4rem'
+    };
+    //@ts-ignore
+    return props.size ? size[props.size] : size['md'];
+  }, [props.size]);
 
   const avatarList = list.map((item) => {
     const modelData =
@@ -33,7 +53,7 @@ const AIModelSelector = ({ list, onchange, disableTip, ...props }: Props) => {
             mr={2}
             src={modelData?.avatar || HUGGING_FACE_ICON}
             fallbackSrc={HUGGING_FACE_ICON}
-            w={'18px'}
+            w={avatarSize}
           />
           <Box>{item.label}</Box>
         </Flex>
@@ -46,36 +66,46 @@ const AIModelSelector = ({ list, onchange, disableTip, ...props }: Props) => {
       ? avatarList.concat({
           label: (
             <Flex alignItems={'center'}>
-              <Avatar borderRadius={'0'} mr={2} src={LOGO_ICON} w={'18px'} />
+              <Avatar borderRadius={'0'} mr={2} src={LOGO_ICON} w={avatarSize} />
               <Box>{t('common:support.user.Price')}</Box>
             </Flex>
           ),
           value: 'price'
         })
       : avatarList;
-  }, [feConfigs.show_pay, avatarList, t]);
+  }, [feConfigs.show_pay, avatarList, avatarSize, t]);
 
   const onSelect = useCallback(
     (e: string) => {
       if (e === 'price') {
-        router.push(AI_POINT_USAGE_CARD_ROUTE);
+        onOpenAiPointsModal();
         return;
       }
       return onchange?.(e);
     },
-    [onchange, router]
+    [onOpenAiPointsModal, onchange]
   );
 
   return (
-    <MyTooltip label={disableTip}>
-      <MySelect
-        className="nowheel"
-        isDisabled={!!disableTip}
-        list={expandList}
-        {...props}
-        onchange={onSelect}
-      />
-    </MyTooltip>
+    <Box
+      css={{
+        span: {
+          display: 'block'
+        }
+      }}
+    >
+      <MyTooltip label={disableTip}>
+        <MySelect
+          className="nowheel"
+          isDisabled={!!disableTip}
+          list={expandList}
+          {...props}
+          onchange={onSelect}
+        />
+      </MyTooltip>
+
+      {isOpenAiPointsModal && <AiPointsModal onClose={onCloseAiPointsModal} />}
+    </Box>
   );
 };
 

@@ -83,15 +83,20 @@ const DatasetSchema = new Schema({
       }
     }
   },
-  externalReadUrl: {
-    type: String
-  },
   inheritPermission: {
     type: Boolean,
     default: true
   },
+  apiServer: {
+    type: Object
+  },
+
+  autoSync: Boolean,
 
   // abandoned
+  externalReadUrl: {
+    type: String
+  },
   defaultPermission: Number
 });
 
