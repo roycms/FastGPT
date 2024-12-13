@@ -100,7 +100,7 @@ const Dataset = () => {
     if (!feConfigs?.isPlus) {
       toast({
         status: 'warning',
-        title: t('common:common.system.Need Contact Admin')
+        title: t('common:common.system.Commercial version function')
       });
       return;
     }

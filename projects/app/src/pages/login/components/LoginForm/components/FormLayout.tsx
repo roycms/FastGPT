@@ -96,9 +96,6 @@ const FormLayout = ({ children, setPageType, pageType }: Props) => {
             w={['42px', '56px']}
             h={['42px', '56px']}
             bg={'myGray.25'}
-            borderRadius={'8px'}
-            borderWidth={'1.5px'}
-            borderColor={'borderColor.base'}
             borderRadius={['semilg', 'lg']}
             borderWidth={['1px', '1.5px']}
             borderColor={'myGray.200'}

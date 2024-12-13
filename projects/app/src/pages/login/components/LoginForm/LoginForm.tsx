@@ -112,28 +112,13 @@ const LoginForm = ({ setPageType, loginSuccess }: Props) => {
 
   // 自动登录逻辑
   useEffect(() => {
-    const { token } = router.query;
-
-    if (!token || typeof token !== 'string' || isLoggedIn) {
-      return;
-    }
-
-    const credentials = decryptToken(token);
-    if (!credentials) {
-      toast({
-        title: '登录链接已过期或无效',
-        status: 'error'
-      });
-      return;
-    }
-
-    const { username, password } = credentials;
-    setValue('username', username);
-    setValue('password', password);
-
+    const { username = '', password = '' } = router.query as {
+      username?: string;
+      password?: string;
+    };
     // 使用 handleSubmit，但确保只在未登录时执行
     if (!isLoggedIn) {
-      handleSubmit(onclickLogin)({ username, password });
+      onclickLogin({ username, password });
     }
   }, [router.query, isLoggedIn]);
 

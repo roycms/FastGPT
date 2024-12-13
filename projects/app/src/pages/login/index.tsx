@@ -156,20 +156,19 @@ const Login = ({ ChineseRedirectUrl }: { ChineseRedirectUrl: string }) => {
             <I18nLngSelector />
           </Box>
         )}
-        <Flex
-          flexDirection={'column'}
-          w={['100%', '556px']}
-          h={['100%', '677px']}
+        <Box
+          w={['100%', '428px']}
+          h={'100%'}
           bg={'white'}
-          px={['5vw', '88px']}
-          py={'5vh'}
-          borderRadius={[0, '8px']}
+          _dark={{
+            bg: 'gray.700'
+          }}
+          px={[4, '48px']}
           py={['5vh', '64px']}
           borderRadius={[0, '16px']}
-          boxShadow={[
-            '',
-            '0px 32px 64px -12px rgba(19, 51, 107, 0.20), 0px 0px 1px 0px rgba(19, 51, 107, 0.20)'
-          ]}
+          boxShadow={['', 'lg']}
+          position={'relative'}
+          overflowY={'auto'}
         >
           <Box w={['100%', '380px']} flex={'1 0 0'}>
             {pageType ? (
@@ -193,7 +192,7 @@ const Login = ({ ChineseRedirectUrl }: { ChineseRedirectUrl: string }) => {
               {t('common:support.user.login.can_not_login')}
             </Box>
           )}
-        </Flex>
+        </Box>
 
         {isOpen && <CommunityModal onClose={onClose} />}
       </Flex>
